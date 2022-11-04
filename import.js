@@ -28,7 +28,7 @@ module.exports = async function seed(db) {
         if (err) {
           throw err;
         }
-        console.log(`Inserted: ${res.insertedCount} rows`);
       });
     });
 };
+module.exports.Patient = Patient;

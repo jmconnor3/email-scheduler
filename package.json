@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "csvtojson": "^2.0.10",
-    "mongodb-legacy": "^4.0.0"
+    "mongoose": "^6.7.1"
   }
 }

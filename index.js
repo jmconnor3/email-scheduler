@@ -1,27 +1,21 @@
+const mongoose = require("mongoose");
 const seed = require("./import");
-const getEmails = require("./getEmails");
+const getEmails = require("./seedEmail");
 
-const { MongoClient } = require("mongodb-legacy");
 // Connect URL
-const url = "mongodb://127.0.0.1:27017";
-let db;
+const url = "mongodb://127.0.0.1:27017/careMetx_db";
 // Connect to MongoDB
-MongoClient.connect(
-  url,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  async (err, client) => {
-    if (err) {
-      return console.log(err);
-    }
+mongoose.connect(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-    // Specify the database you want to access
-    db = client.db("careMetx_db");
-
-    console.log(`MongoDB Connected: ${url}`);
-    await seed(db);
-    await getEmails(db);
-  }
-);
+// Specify the database you want to access
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+console.log(`MongoDB Connected: ${url}`);
+async function main() {
+  await seed(db).catch((e) => console.error(e));
+  //   await getEmails(db);
+}
+main();

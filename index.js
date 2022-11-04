@@ -16,6 +16,6 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 console.log(`MongoDB Connected: ${url}`);
 async function main() {
   await seed(db).catch((e) => console.error(e));
-  //   await getEmails(db);
+  await getEmails(db).catch((e) => console.error(e));
 }
 main();
